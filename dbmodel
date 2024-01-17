@@ -1,0 +1,61 @@
+Table user
+{
+  user_id integer [primary key]
+  user_name varchar
+  password varchar
+  First_name varchar
+  Last_name varchar
+}
+
+Table files
+{
+  file_id integer [primary key]
+  file_name varchar
+  file_path varchar
+  is_editable boolean
+}
+
+
+Table user_to_file{
+  id integer unique [primary key]
+  host_id integer
+  file_id integer
+}
+
+
+Table user_bio{
+  id integer unique [primary key] 
+  id_bio integer
+  user_bio varchar
+  pfp varchar
+  nick_name varchar
+}
+Table frined
+{ id integer [primary key]
+  user1 integer
+  user2 integer
+  is_block boolean
+}
+Table old_bio
+{
+  id integer unique [primary key]
+  host_id integer 
+  old_pfp varchar
+  old_user_bio varchar
+
+}
+Table shared
+{
+  id integer unique [primary key]
+  owner_id integer
+  shared_id integer
+}
+
+Ref: user.user_id < user_to_file.host_id
+Ref: files.file_id < user_to_file.file_id
+Ref: user.user_id < user_bio.id
+Ref: user.user_id < frined.user1
+Ref: user.user_id < frined.user2
+Ref: user_bio.id  < old_bio.host_id
+Ref: user.user_id < shared.owner_id
+Ref: user.user_id < shared.shared_id
